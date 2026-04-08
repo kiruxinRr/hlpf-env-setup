@@ -1,19 +1,19 @@
 ## Student
-- [cite_start]Name: Руслан Кірюхін [cite: 296]
-- Group: [ФІСТ 232/2]
-- [cite_start]University: Європейський Університет [cite: 297]
+- Name: Руслан Кірюхін
+- Group: ФІСТ 232/2
+- University: Європейський Університет
 
-## [cite_start]Практичне заняття №2 — NestJS + PostgreSQL + Redis у Docker [cite: 298]
+## Практичне заняття №3 — CRUD REST API для MiniShop
 
-## [cite_start]Структура репозиторію [cite: 299]
+### Структура репозиторію
+```text
 .
-[cite_start]├── src/                # NestJS source code [cite: 302]
-[cite_start]├── Dockerfile [cite: 303]
-[cite_start]├── docker-compose.yml [cite: 304]
-[cite_start]├── .env.example        # шаблон змінних оточення [cite: 305]
-[cite_start]└── README.md [cite: 306]
-
-## [cite_start]Запуск проекту [cite: 308]
-```bash
-cp .env.example .env
-docker compose up --build [cite: 310-311]
+├── src/
+│   ├── categories/          # Модуль категорій (Entity, Module, Service, Controller)
+│   ├── products/            # Модуль продуктів (Entity, Module, Service, Controller)
+│   ├── migrations/          # Файли міграцій БД
+│   ├── data-source.ts       # Конфігурація TypeORM CLI
+│   └── app.module.ts        # Головний модуль застосунку
+├── Dockerfile
+├── docker-compose.yml
+└── README.md
