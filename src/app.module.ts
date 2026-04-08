@@ -9,6 +9,7 @@ import { Product } from './products/product.entity';
 import { CategoriesModule } from './categories/categories.module';
 import { ProductsModule } from './products/products.module';
 import { CreateTables1712610869345 } from './migrations/1712610869345-CreateTables';
+import { AddIsActiveToProducts1775682852295 } from './migrations/1775682852295-AddIsActiveToProducts';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { CreateTables1712610869345 } from './migrations/1712610869345-CreateTabl
       synchronize: false, // ВИМКНЕНО
       migrationsRun: true,
       migrations: [CreateTables1712610869345],
+      migrations: [CreateTables1712610869345, AddIsActiveToProducts1775682852295],
     }),
     CacheModule.registerAsync({
       isGlobal: true,
