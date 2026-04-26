@@ -22,20 +22,23 @@ let CategoriesService = class CategoriesService {
     constructor(categoryRepo) {
         this.categoryRepo = categoryRepo;
     }
-    async findAll() { return this.categoryRepo.find(); }
+    async findAll() {
+        return this.categoryRepo.find();
+    }
     async findOne(id) {
         const category = await this.categoryRepo.findOne({ where: { id } });
-        if (!category)
+        if (!category) {
             throw new common_1.NotFoundException(`Category #${id} not found`);
+        }
         return category;
     }
-    async create(data) {
-        const category = this.categoryRepo.create(data);
+    async create(dto) {
+        const category = this.categoryRepo.create(dto);
         return this.categoryRepo.save(category);
     }
-    async update(id, data) {
+    async update(id, dto) {
         const category = await this.findOne(id);
-        Object.assign(category, data);
+        Object.assign(category, dto);
         return this.categoryRepo.save(category);
     }
     async remove(id) {
