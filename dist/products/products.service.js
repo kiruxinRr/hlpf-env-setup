@@ -22,26 +22,44 @@ let ProductsService = class ProductsService {
     constructor(productRepo) {
         this.productRepo = productRepo;
     }
-    async findAll() { return this.productRepo.find({ relations: ['category'] }); }
+    async findAll() {
+        return this.productRepo.find({
+            relations: ['category'],
+        });
+    }
     async findOne(id) {
-        const product = await this.productRepo.findOne({ where: { id }, relations: ['category'] });
-        if (!product)
+        const product = await this.productRepo.findOne({
+            where: { id },
+            relations: ['category'],
+        });
+        if (!product) {
             throw new common_1.NotFoundException(`Product #${id} not found`);
+        }
         return product;
     }
-    async create(data) {
+    async create(dto) {
         const product = this.productRepo.create({
-            ...data,
-            category: data.categoryId ? { id: data.categoryId } : null,
+            name: dto.name,
+            description: dto.description,
+            price: dto.price,
+            stock: dto.stock ?? 0,
+            category: dto.categoryId ? { id: dto.categoryId } : undefined,
         });
         return this.productRepo.save(product);
     }
-    async update(id, data) {
+    async update(id, dto) {
         const product = await this.findOne(id);
-        Object.assign(product, {
-            ...data,
-            category: data.categoryId ? { id: data.categoryId } : product.category,
-        });
+        if (dto.name !== undefined)
+            product.name = dto.name;
+        if (dto.description !== undefined)
+            product.description = dto.description;
+        if (dto.price !== undefined)
+            product.price = dto.price;
+        if (dto.stock !== undefined)
+            product.stock = dto.stock;
+        if (dto.categoryId !== undefined) {
+            product.category = { id: dto.categoryId };
+        }
         return this.productRepo.save(product);
     }
     async remove(id) {

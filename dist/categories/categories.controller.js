@@ -15,6 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CategoriesController = void 0;
 const common_1 = require("@nestjs/common");
 const categories_service_1 = require("./categories.service");
+const create_category_dto_1 = require("./dto/create-category.dto");
+const update_category_dto_1 = require("./dto/update-category.dto");
 let CategoriesController = class CategoriesController {
     categoriesService;
     constructor(categoriesService) {
@@ -22,8 +24,10 @@ let CategoriesController = class CategoriesController {
     }
     findAll() { return this.categoriesService.findAll(); }
     findOne(id) { return this.categoriesService.findOne(id); }
-    create(body) { return this.categoriesService.create(body); }
-    update(id, body) { return this.categoriesService.update(id, body); }
+    create(dto) { return this.categoriesService.create(dto); }
+    update(id, dto) {
+        return this.categoriesService.update(id, dto);
+    }
     remove(id) { return this.categoriesService.remove(id); }
 };
 exports.CategoriesController = CategoriesController;
@@ -44,7 +48,7 @@ __decorate([
     (0, common_1.Post)(),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [create_category_dto_1.CreateCategoryDto]),
     __metadata("design:returntype", void 0)
 ], CategoriesController.prototype, "create", null);
 __decorate([
@@ -52,7 +56,7 @@ __decorate([
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, Object]),
+    __metadata("design:paramtypes", [Number, update_category_dto_1.UpdateCategoryDto]),
     __metadata("design:returntype", void 0)
 ], CategoriesController.prototype, "update", null);
 __decorate([
