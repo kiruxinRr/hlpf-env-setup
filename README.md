@@ -1,32 +1,41 @@
-## Student
-- Name: Руслан Кірюхін
-- Group: ФІСТ 232/2
+# MiniShop API — SK-CARS 🚗
 
-## Практичне заняття №4 — DTO + class-validator + Pipes
+## Студент
+- **ПІБ:** Кірюхін Руслан
+- **Університет:** Європейський університет
+- **Дисципліна:** Високорівневі мови програмування та фреймворки
 
-### Структура репозиторію
-```text
-.
-├── src/
-│   ├── categories/
-│   │   ├── dto/
-│   │   │   ├── create-category.dto.ts
-│   │   │   └── update-category.dto.ts
-│   │   ├── categories.controller.ts
-│   │   └── categories.service.ts
-│   ├── products/
-│   │   ├── dto/
-│   │   │   ├── create-product.dto.ts
-│   │   │   └── update-product.dto.ts
-│   │   ├── products.controller.ts
-│   │   └── products.service.ts
-│   ├── common/
-│   │   └── pipes/
-│   │       └── trim.pipe.ts
-│   ├── main.ts
-│   └── app.module.ts
-├── docker-compose.yml
-└── README.md
+---
+
+## Практична робота №6: Interceptors, Exception Filters та Swagger
+
+### Опис виконаної роботи
+У межах цієї роботи MiniShop API було перетворено на production-ready сервіс шляхом впровадження інструментів моніторингу, стандартизації та документування.
+
+### Впроваджені компоненти:
+1.  **LoggingInterceptor**: Логує кожен HTTP-запит у консоль (Метод, URL, Статус-код, Час виконання у мс).
+2.  **TransformInterceptor**: Забезпечує єдиний формат успішних відповідей сервера.
+3.  **HttpExceptionFilter**: Стандартизує вивід помилок, додаючи унікальний `traceId` для зручного дебагу.
+4.  **Swagger UI**: Реалізовано інтерактивну документацію за стандартом OpenAPI.
+
+---
+
+### Тестування API
+
+#### 1. Swagger UI (Документація)
+Документація доступна за адресою: `http://localhost:3000/api/docs`
 
 
-
+#### 2. Формат успішної відповіді (TransformInterceptor)
+Кожна успішна відповідь тепер обгорнута в об'єкт:
+```json
+{
+  "data": {
+    "id": 1,
+    "name": "SK-CARS Detailing Kit",
+    "price": 1200,
+    "stock": 5
+  },
+  "statusCode": 201,
+  "timestamp": "2026-05-06T22:15:30.000Z"
+}
