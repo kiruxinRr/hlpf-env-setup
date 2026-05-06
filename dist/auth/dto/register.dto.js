@@ -9,27 +9,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateCategoryDto = void 0;
+exports.RegisterDto = void 0;
 const openapi = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
-class CreateCategoryDto {
+class RegisterDto {
+    email;
+    password;
     name;
-    description;
     static _OPENAPI_METADATA_FACTORY() {
-        return { name: { required: true, type: () => String, minLength: 2, maxLength: 100 }, description: { required: false, type: () => String, maxLength: 500 } };
+        return { email: { required: true, type: () => String, format: "email" }, password: { required: true, type: () => String, minLength: 6 }, name: { required: false, type: () => String } };
     }
 }
-exports.CreateCategoryDto = CreateCategoryDto;
+exports.RegisterDto = RegisterDto;
 __decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.MinLength)(2),
-    (0, class_validator_1.MaxLength)(100),
+    (0, class_validator_1.IsEmail)({}, { message: 'Некоректний формат email' }),
     __metadata("design:type", String)
-], CreateCategoryDto.prototype, "name", void 0);
+], RegisterDto.prototype, "email", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.MinLength)(6, { message: 'Пароль має бути не менше 6 символів' }),
+    __metadata("design:type", String)
+], RegisterDto.prototype, "password", void 0);
 __decorate([
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
-    (0, class_validator_1.MaxLength)(500),
     __metadata("design:type", String)
-], CreateCategoryDto.prototype, "description", void 0);
-//# sourceMappingURL=create-category.dto.js.map
+], RegisterDto.prototype, "name", void 0);
+//# sourceMappingURL=register.dto.js.map
